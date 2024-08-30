@@ -16,7 +16,7 @@ const DashboardPage = () => {
 
   return (
     <div className='text-center'>
-      <h1 className='text-red-500'>DashboardPage </h1>
+      <h1 className='text-red-500'>DashboardPage</h1>
       <div className='flex flex-wrap gap-4 justify-center items-center'>
         <OrderChart
           initialDate={['2022-01', '2024-08']}

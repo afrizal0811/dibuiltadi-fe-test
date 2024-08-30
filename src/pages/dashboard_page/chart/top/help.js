@@ -13,6 +13,7 @@ export const data = (value) => {
 export const options = (title) => {
   return {
     title: title,
+    colors: ['#8CB0B2'],
     legend: { position: 'top' },
     hAxis: {
       title: 'Amount (M)',

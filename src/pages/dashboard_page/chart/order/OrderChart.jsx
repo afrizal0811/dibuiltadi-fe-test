@@ -48,7 +48,7 @@ const OrderChart = (props) => {
             chartType='BarChart'
             height='600px'
             data={data(value, typeData, numberData)}
-            options={options(titleChart)}
+            options={options(titleChart, params)}
           />
         </div>
       </Spin>
