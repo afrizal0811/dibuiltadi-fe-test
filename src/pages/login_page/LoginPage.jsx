@@ -16,7 +16,7 @@ const LoginPage = () => {
     if (checkValidToken()) {
       navigate('/')
     }
-  }, [])
+  }, [navigate])
   return (
     <div className='min-h-screen text-eerie-black flex justify-center items-center'>
       <div className='max-w-screen-lg m-10 bg-white h-auto shadow-2xl rounded-xl flex justify-center'>
