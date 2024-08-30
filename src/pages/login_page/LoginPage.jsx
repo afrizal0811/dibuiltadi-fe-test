@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react'
+import { Form } from 'antd'
+import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
-import Alert from '../../components/Alert'
-import Button from '../../components/Button'
-import Input from '../../components/Input'
+import {
+  Alert,
+  Button,
+  FormItem,
+  Input,
+  InputPassword,
+} from '../../components/antd_components'
 import imagePath from '../../constants/imagePath'
 import { getToken } from '../../utilities/localStorages'
 import LoginValidation from '../../validation/LoginValidation'
+import { findField } from './help'
 
 const LoginPage = () => {
+  const [form] = Form.useForm()
   const { navigate } = useOutletContext()
-  const { errors, handleChange, handleSubmit, isLoading, validated } =
+  const { errors, handleChange, handleFinish, isLoading, isSubmitted } =
     LoginValidation(navigate)
+  const [fields, setFields] = useState([])
 
   useEffect(() => {
     if (getToken()) {
@@ -29,48 +37,68 @@ const LoginPage = () => {
             />
           </div>
         </div>
-        <form
-          className='md:w-1/2 p-6 md:p-10'
-          onSubmit={handleSubmit}
-          autoComplete='off'
-          noValidate
-        >
+        <div className='md:w-1/2 p-6 md:p-10'>
           <div className='h-full flex flex-col justify-center items-center'>
-            <div className='w-full my-10 flex flex-col gap-4'>
-              {errors.failedAlert && <Alert text={errors.failedAlert} />}
-              <h1 className='mb-4 text-xl sm:text-2xl font-bold'>
-                Sign in to your account
-              </h1>
-              <div>
-                <Input
-                  placeholder='Input your phone number'
-                  type='text'
-                  name='phone'
+            <div className='w-full my-10 flex flex-col'>
+              {errors.failedAlert && (
+                <Alert
+                  message={errors.failedAlert}
+                  type='error'
+                  className='mb-5'
+                />
+              )}
+              <Form
+                onFinish={handleFinish}
+                autoComplete='off'
+                noValidate
+                layout='vertical'
+                form={form}
+                fields={fields}
+                onFieldsChange={(_, allFields) => {
+                  setFields(allFields)
+                }}
+              >
+                <h1 className='mb-4 text-xl sm:text-2xl font-bold'>
+                  Sign in to your account
+                </h1>
+                <FormItem
+                  errors={errors.phone}
                   label='Phone Number'
-                  required
-                  onChange={handleChange}
-                  isInvalid={validated && errors.phone}
-                />
-              </div>
-              <div>
-                <Input
-                  placeholder='Input your password'
-                  type='password'
-                  name='password'
+                  name='phone'
+                  fields={findField(fields, 'phone')}
+                  isSubmitted={isSubmitted}
+                >
+                  <Input
+                    placeholder='Input your phone number'
+                    name='phone'
+                    type='text'
+                    onChange={handleChange}
+                  />
+                </FormItem>
+                <FormItem
+                  errors={errors.password}
                   label='Password'
-                  required
-                  onChange={handleChange}
-                  isInvalid={validated && errors.password}
+                  name='password'
+                  fields={findField(fields, 'password')}
+                  isSubmitted={isSubmitted}
+                >
+                  <InputPassword
+                    placeholder='Input your password'
+                    name='password'
+                    type='password'
+                    onChange={handleChange}
+                  />
+                </FormItem>
+                <Button
+                  text='Sign In'
+                  htmlType='submit'
+                  disabled={isLoading}
+                  block
                 />
-              </div>
-              <Button
-                text='Sign In'
-                type='submit'
-                disabled={isLoading}
-              />
+              </Form>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   )

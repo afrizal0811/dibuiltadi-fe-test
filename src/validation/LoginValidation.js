@@ -1,36 +1,38 @@
 import { useEffect, useState } from 'react'
+import { loginUrl } from '../constants/baseUrl'
 import { apiValidation, postApi } from '../utilities/handleApi'
 import isObjectEmpty from '../utilities/isObjectEmpty'
 import validateForm from '../utilities/validationForm'
-import { loginUrl } from '../constants/baseUrl'
+
 const LoginValidation = (navigate) => {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-  const [validated, setValidated] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [value, setValue] = useState({
     phone: '',
     password: '',
   })
 
   useEffect(() => {
+    if (isSubmitted) {
+      setErrors(validateForm(value))
+    }
+  }, [value, isSubmitted])
 
-    setErrors(validateForm(value))
-  }, [value])
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleFinish = async () => {
     setIsLoading(true)
-    setValidated(true)
+    setIsSubmitted(true)
+    setErrors(validateForm(value))
     const url = process.env.REACT_APP_BASE_URL + loginUrl
     if (isObjectEmpty(errors)) {
       const result = await postApi(url, value)
-      const isError = apiValidation(result)
-      if (!isError) {
+      const error = apiValidation(result)
+      if (!error) {
         navigate('/')
       } else {
         setErrors((prev) => ({
           ...prev,
-          failedAlert: isError,
+          failedAlert: error !== 'Validation error' ? error : '',
         }))
       }
     }
@@ -46,9 +48,8 @@ const LoginValidation = (navigate) => {
   return {
     errors,
     handleChange,
-    handleSubmit,
+    handleFinish,
     isLoading,
-    validated,
   }
 }
 
