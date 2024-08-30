@@ -1,6 +1,6 @@
 import { Form } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Alert,
   Button,
@@ -15,7 +15,7 @@ import { findField } from './help'
 
 const LoginPage = () => {
   const [form] = Form.useForm()
-  const { navigate } = useOutletContext()
+  const navigate = useNavigate()
   const { errors, handleChange, handleFinish, isLoading, isSubmitted } =
     LoginValidation(navigate)
   const [fields, setFields] = useState([])
@@ -58,7 +58,14 @@ const LoginPage = () => {
                   setFields(allFields)
                 }}
               >
-                <h1 className='mb-4 text-xl sm:text-2xl font-bold'>
+                <img
+                  src={imagePath.logo}
+                  alt='logo'
+                  //add classname to make logo at center div
+
+                  className='w-20 h-20 object-contain mx-auto mb-1'
+                />
+                <h1 className='mb-6 text-xl sm:text-2xl font-bold text-center'>
                   Sign in to your account
                 </h1>
                 <FormItem

@@ -4,8 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'jet-stream': '#BCD1D2',
-        'pewter-blue': '#8CB0B2',
+        'jet-stream': {
+          light: '#EBF1F1',
+          DEFAULT: '#BCD1D2',
+          dark: '#8CB0B2',
+        },
         'eerie-black': '#15181C',
       },
     },

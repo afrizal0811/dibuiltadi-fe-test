@@ -9,7 +9,7 @@ export const data = (value) => {
 
 export const options = {
   title: 'Order Comparison',
-  colors: ['#8CB0B2'],
+  colors: ['#BCD1D2'],
   legend: { position: 'top' },
   hAxis: {
     title: 'Total Amount',

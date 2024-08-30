@@ -14,7 +14,7 @@ export const data = (value, type, number) => {
 export const options = (title, vTitle) => {
   return {
     title: title,
-    colors: ['#8CB0B2'],
+    colors: ['#BCD1D2'],
     legend: { position: 'top' },
     hAxis: {
       title: 'Orders',

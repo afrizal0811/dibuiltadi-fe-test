@@ -10,11 +10,11 @@ import OrderPage from './pages/order_page/OrderPage'
 const RouteHandler = () => {
   return (
     <Routes>
+      <Route
+        element={<LoginPage />}
+        path='/login'
+      />
       <Route element={<Layout />}>
-        <Route
-          element={<LoginPage />}
-          path='/login'
-        />
         <Route
           element={<DashboardPage />}
           path='/'
