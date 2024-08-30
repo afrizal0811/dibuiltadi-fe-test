@@ -19,12 +19,14 @@ const DashboardPage = () => {
   return (
     <div className='text-center'>
       <h1 className='text-red-500'>DashboardPage </h1>
-      <MonthlyOrders />
-      <YearlyOrders />
-      <OrderComparison />
-      <TopProducts />
-      <TopBuyers />
-      <TopStores />
+      <div className='flex flex-wrap gap-4 justify-center items-center'>
+        <MonthlyOrders />
+        <YearlyOrders />
+        <OrderComparison />
+        <TopProducts />
+        <TopBuyers />
+        <TopStores />
+      </div>
     </div>
   )
 }
