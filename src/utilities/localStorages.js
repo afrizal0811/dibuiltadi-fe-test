@@ -2,7 +2,7 @@ export function localStorages(token) {
   localStorage.setItem('token', token)
 }
 
-export const checkValidToken = () => {
+export const getToken = () => {
   const token = localStorage.getItem('token')
   return token
 }

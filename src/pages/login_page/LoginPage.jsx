@@ -4,7 +4,7 @@ import Alert from '../../components/Alert'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import imagePath from '../../constants/imagePath'
-import { checkValidToken } from '../../utilities/localStorages'
+import { getToken } from '../../utilities/localStorages'
 import LoginValidation from '../../validation/LoginValidation'
 
 const LoginPage = () => {
@@ -13,7 +13,7 @@ const LoginPage = () => {
     LoginValidation(navigate)
 
   useEffect(() => {
-    if (checkValidToken()) {
+    if (getToken()) {
       navigate('/')
     }
   }, [navigate])

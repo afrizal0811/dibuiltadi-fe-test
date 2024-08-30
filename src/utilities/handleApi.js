@@ -1,9 +1,14 @@
 import axios from 'axios'
-import { localStorages } from './localStorages'
+import { localStorages, getToken } from './localStorages'
 
 export const getApi = async (URL) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: getToken() ? `Bearer ${getToken()}` : '',
+  }
   const url = await axios
-    .get(URL)
+    .get(URL, { headers })
     .then((response) => {
       return response.data
     })

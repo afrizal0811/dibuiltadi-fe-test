@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { apiValidation, postApi } from '../utilities/handleApi'
 import isObjectEmpty from '../utilities/isObjectEmpty'
 import validateForm from '../utilities/validationForm'
+import { loginUrl } from '../constants/baseUrl'
 const LoginValidation = (navigate) => {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
@@ -20,8 +21,7 @@ const LoginValidation = (navigate) => {
     e.preventDefault()
     setIsLoading(true)
     setValidated(true)
-    const url =
-      process.env.REACT_APP_BASE_URL + '/api/dashboard/common/v1/auth/login'
+    const url = process.env.REACT_APP_BASE_URL + loginUrl
     if (isObjectEmpty(errors)) {
       const result = await postApi(url, value)
       const isError = apiValidation(result)
