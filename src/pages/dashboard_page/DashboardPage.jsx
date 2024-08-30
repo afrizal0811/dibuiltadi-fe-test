@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { getToken } from '../../utilities/localStorages'
-import MonthlyOrders from './chart/monthly_orders/MonthlyOrders'
-import OrderComparison from './chart/order_comparison/OrderComparison'
-import TopBuyers from './chart/top_buyers/TopBuyers'
-import TopProducts from './chart/top_products/TopProducts'
-import TopStores from './chart/top_stores/TopStores'
-import YearlyOrders from './chart/yearly_orders/YearlyOrders'
+import OrderChart from './chart/order/OrderChart'
+import OrderComparison from './chart/order/order_comparison/OrderComparison'
+import TopChart from './chart/top/TopChart'
+
 const DashboardPage = () => {
   const { navigate } = useOutletContext()
 
@@ -20,12 +18,35 @@ const DashboardPage = () => {
     <div className='text-center'>
       <h1 className='text-red-500'>DashboardPage </h1>
       <div className='flex flex-wrap gap-4 justify-center items-center'>
-        <MonthlyOrders />
-        <YearlyOrders />
+        <OrderChart
+          initialDate={['2022-01', '2024-08']}
+          numberData='orders'
+          titleChart='Monthly Order'
+          typeData='month'
+          urlType='monthly'
+          datePickerType='month'
+        />
+        <OrderChart
+          initialDate={['2022', '2024']}
+          numberData='amount'
+          titleChart='Yearly Order'
+          typeData='year'
+          urlType='yearly'
+          datePickerType='year'
+        />
         <OrderComparison />
-        <TopProducts />
-        <TopBuyers />
-        <TopStores />
+        <TopChart
+          titleChart='Top Buyers'
+          urlType='buyers'
+        />
+        <TopChart
+          titleChart='Top Products'
+          urlType='products'
+        />
+        <TopChart
+          titleChart='Top Stores'
+          urlType='stores'
+        />
       </div>
     </div>
   )

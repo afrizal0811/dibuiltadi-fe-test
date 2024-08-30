@@ -1,16 +1,23 @@
-
 import React, { useEffect, useState } from 'react'
 import { Chart } from 'react-google-charts'
-import { Spin, RangeDatePicker } from '../../../../components/antd_components'
+import { RangeDatePicker, Spin } from '../../../../components/antd_components'
 import { orderSummaryUrl } from '../../../../constants/baseUrl'
 import { getApi } from '../../../../utilities/handleApi'
-import { data, options } from './help'
+import { data, options, removeString } from './help'
 
-
-const MonthlyOrders = () => {
+const OrderChart = (props) => {
+  const {
+    initialDate,
+    numberData,
+    titleChart,
+    typeData,
+    urlType,
+    datePickerType,
+  } = props
   const [value, setValue] = useState([])
-  const [date, setDate] = useState(['2022-01', '2024-08'])
+  const [date, setDate] = useState(initialDate)
   const [isLoading, setIsLoading] = useState(false)
+  const params = removeString(urlType)
 
   useEffect(() => {
     const fetch = async () => {
@@ -18,13 +25,13 @@ const MonthlyOrders = () => {
       const url =
         process.env.REACT_APP_BASE_URL +
         orderSummaryUrl +
-        `/monthly?start_month=${date[0]}&end_month=${date[1]}`
+        `/${urlType}?start_${params}=${date[0]}&end_${params}=${date[1]}`
       const result = await getApi(url)
       setValue(result.items)
       setIsLoading(false)
     }
     fetch()
-  }, [date])
+  }, [date, params, urlType])
 
   return (
     <div className='w-5/6 md:w-5/12 flex flex-col m-4 p-2 border border-gray-100 rounded-xl shadow-xl'>
@@ -32,7 +39,7 @@ const MonthlyOrders = () => {
         <p className='text-sm'>Date Range</p>
         <RangeDatePicker
           setDate={setDate}
-          picker='month'
+          picker={datePickerType}
         />
       </div>
       <Spin loading={isLoading}>
@@ -40,8 +47,8 @@ const MonthlyOrders = () => {
           <Chart
             chartType='BarChart'
             height='600px'
-            data={data(value)}
-            options={options}
+            data={data(value, typeData, numberData)}
+            options={options(titleChart)}
           />
         </div>
       </Spin>
@@ -49,4 +56,4 @@ const MonthlyOrders = () => {
   )
 }
 
-export default MonthlyOrders
+export default OrderChart
