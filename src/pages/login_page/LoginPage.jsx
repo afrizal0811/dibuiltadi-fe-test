@@ -61,8 +61,6 @@ const LoginPage = () => {
                 <img
                   src={imagePath.logo}
                   alt='logo'
-                  //add classname to make logo at center div
-
                   className='w-20 h-20 object-contain mx-auto mb-1'
                 />
                 <h1 className='mb-6 text-xl sm:text-2xl font-bold text-center'>

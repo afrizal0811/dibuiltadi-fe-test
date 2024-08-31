@@ -14,6 +14,12 @@ export const columns = (handleDetail) => [
     width: 30,
   },
   {
+    dataIndex: ['buyer', 'phone'],
+    key: 'buyerPhone',
+    title: 'Buyer Phone',
+    width: 30,
+  },
+  {
     dataIndex: ['store', 'code'],
     key: 'storeCode',
     title: 'Store Code',
@@ -30,6 +36,7 @@ export const columns = (handleDetail) => [
     key: 'grandTotal',
     title: 'Grand Total',
     width: 25,
+    render: (text) => Number(text),
   },
   {
     key: 'action',
@@ -38,12 +45,11 @@ export const columns = (handleDetail) => [
     fixed: 'right',
     render: (text, record) => (
       <div className='flex justify-center items-center'>
-
-      <Button
-        text='View'
-        onClick={() => handleDetail(record.id)}
+        <Button
+          text='View'
+          onClick={() => handleDetail(record.invoice_no)}
         />
-        </div>
+      </div>
     ),
   },
 ]

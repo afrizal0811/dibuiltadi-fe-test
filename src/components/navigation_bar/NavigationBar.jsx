@@ -46,14 +46,14 @@ const NavigationBar = (props) => {
             >
               <li>
                 <Link
-                  to={`/${item}`}
+                  to={item.link}
                   className={`text-sm text-eerie-black ${
                     item === pathname.substring(1)
                       ? 'font-bold'
                       : 'font-semibold'
                   }`}
                 >
-                  {titleCase(item)}
+                  {titleCase(item.name)}
                 </Link>
               </li>
               {index !== menuList.length - 1 && (
@@ -112,11 +112,11 @@ const NavigationBar = (props) => {
                   key={index}
                 >
                   <Link
-                    to={`/${item}`}
+                    to={item.link}
                     onClick={() => setIsBurgerOpen(false)}
                     className='block p-4 text-sm font-semibold text-eerie-black hover:bg-jet-stream-light hover:font-bold rounded'
                   >
-                    {titleCase(item)}
+                    {titleCase(item.name)}
                   </Link>
                 </li>
               ))}

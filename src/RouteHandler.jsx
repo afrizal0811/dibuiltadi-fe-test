@@ -6,6 +6,7 @@ import DashboardPage from './pages/dashboard_page/DashboardPage'
 import LoginPage from './pages/login_page/LoginPage'
 import NotFoundPage from './pages/notfound_page/NotFoundPage'
 import OrdersPage from './pages/orders_page/OrdersPage'
+import OrderDetailPage from './pages/orders_page/OrderDetailPage'
 
 const RouteHandler = () => {
   return (
@@ -25,7 +26,11 @@ const RouteHandler = () => {
         />
         <Route
           element={<OrdersPage />}
-          path='/order'
+          path='/orders'
+        />
+        <Route
+          element={<OrderDetailPage />}
+          path='/orders/:invoice'
         />
         <Route
           element={<NotFoundPage />}
