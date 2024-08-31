@@ -9,7 +9,6 @@ import TopChart from './chart/top/TopChart'
 const DashboardPage = () => {
   const { navigate } = useOutletContext()
   const [isAuthorized, setIsAuthorized] = useState(null)
-  console.log('isAuthorized :', isAuthorized);
   useEffect(() => {
     if (!getToken() || isAuthorized) {
       removeToken()

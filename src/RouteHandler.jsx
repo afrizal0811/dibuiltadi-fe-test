@@ -5,7 +5,7 @@ import CouponPage from './pages/coupon_page/CouponPage'
 import DashboardPage from './pages/dashboard_page/DashboardPage'
 import LoginPage from './pages/login_page/LoginPage'
 import NotFoundPage from './pages/notfound_page/NotFoundPage'
-import OrderPage from './pages/order_page/OrderPage'
+import OrdersPage from './pages/orders_page/OrdersPage'
 
 const RouteHandler = () => {
   return (
@@ -24,7 +24,7 @@ const RouteHandler = () => {
           path='/coupon'
         />
         <Route
-          element={<OrderPage />}
+          element={<OrdersPage />}
           path='/order'
         />
         <Route
