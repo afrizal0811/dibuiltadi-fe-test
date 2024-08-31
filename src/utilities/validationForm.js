@@ -4,15 +4,15 @@ const validateForm = (value) => {
 
   if (!value.phone) {
     errors.phone = 'This field is required'
+  } else if (value.phone.length < 8) {
+    errors.phone = 'Phone min 10 numbers'
   } else if (!invalidPhone(value.phone)) {
     errors.phone = 'Input number only'
   }
   
   if (!value.password) {
     errors.password = 'This field is required'
-  } else if (value.password.length < 8) {
-    errors.password = 'Password min 8 characters'
-  }
+  } 
   return errors
 }
 

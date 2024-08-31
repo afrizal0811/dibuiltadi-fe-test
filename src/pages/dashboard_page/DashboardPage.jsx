@@ -1,18 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
-import { getToken } from '../../utilities/localStorages'
+import { getApi, apiValidation } from '../../utilities/handleApi'
+import { getToken, removeToken } from '../../utilities/localStorages'
 import OrderChart from './chart/order/OrderChart'
 import OrderComparison from './chart/order/order_comparison/OrderComparison'
 import TopChart from './chart/top/TopChart'
 
 const DashboardPage = () => {
   const { navigate } = useOutletContext()
-
+  const [isAuthorized, setIsAuthorized] = useState(null)
+  console.log('isAuthorized :', isAuthorized);
   useEffect(() => {
-    if (!getToken()) {
+    if (!getToken() || isAuthorized) {
+      removeToken()
       navigate('/login')
     }
-  }, [navigate])
+  }, [navigate, isAuthorized])
+
+  useEffect(() => {
+    const fetch = async () => {
+      const url = process.env.REACT_APP_BASE_URL + '/auth/profile'
+      const result = await getApi(url)
+      const isValid = apiValidation(result)
+      if (isValid) {
+        setIsAuthorized(true)
+      } else {
+        setIsAuthorized(false)
+      }
+    }
+    fetch()
+  }, [])
 
   return (
     <div className='text-center'>

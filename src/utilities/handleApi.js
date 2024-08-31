@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { localStorages, getToken } from './localStorages'
+import { getToken, localStorages } from './localStorages'
 
 export const getApi = async (URL) => {
   const headers = {
@@ -30,10 +30,17 @@ export const postApi = async (URL, params) => {
   return url
 }
 
-export const apiValidation = (response) => {
-  if (response.status >= 400) {
-    return response.data.response_message
+export const apiValidation = (result) => {
+  if (result.status >= 400) {
+    const { response } = result ?? {}
+    const { data } = result ?? {}
+    if (response) return result.response.data.response_message
+    else if (data) return result.data.response_message
   } else {
-    localStorages(response.data.access_token)
+    const { data } = result ?? {}
+    if (data) {
+      localStorages(result.data.access_token)
+    }
+    return null
   }
 }
