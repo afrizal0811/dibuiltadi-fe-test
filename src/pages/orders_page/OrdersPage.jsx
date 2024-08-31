@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useSearchParams } from 'react-router-dom'
-import { Collapse, Table, Spin } from '../../components/antd_components'
+import { Collapse, Spin } from '../../components/antd_components'
 import { ordersUrl } from '../../constants/baseUrl'
 import { getApi } from '../../utilities/handleApi'
 import { getToken } from '../../utilities/localStorages'
 import FilterComp from './FilterComp'
-import { columns } from './tableConfig'
+import OrdersTable from './table/OrdersTable'
+
 const OrdersPage = () => {
-  const { navigate, pathname } = useOutletContext()
+  const { navigate } = useOutletContext()
   const [searchParams, setSearchParams] = useSearchParams()
   const [values, setValues] = useState([])
   const [loading, setLoading] = useState(false)
@@ -60,9 +61,6 @@ const OrdersPage = () => {
       pageSize: pageSize,
     }))
   }
-  const handleDetail = (id) => {
-    navigate(`${pathname}/${id}`)
-  }
 
   return (
     <div>
@@ -75,21 +73,11 @@ const OrdersPage = () => {
         </Collapse>
       </Spin>
       <div className='m-4 p-4 sm:m-6 shadow-lg'>
-        <Table
-          bordered
-          columns={columns(handleDetail)}
+        <OrdersTable
           data={values.items}
           loading={loading}
-          pagination={{
-            position: ['topRight', 'bottomRight'],
-            total: values.total,
-            onChange: (page, pageSize) => {
-              handlePageChange(page, pageSize)
-            },
-          }}
-          scroll={{
-            x: 1000,
-          }}
+          handlePageChange={handlePageChange}
+          total={values.total}
         />
       </div>
     </div>

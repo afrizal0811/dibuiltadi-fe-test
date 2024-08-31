@@ -1,4 +1,4 @@
-import { Button } from '../../components/antd_components'
+import { Button } from '../../../components/antd_components'
 
 export const columns = (handleDetail) => [
   {
