@@ -69,7 +69,10 @@ const OrdersPage = () => {
           header='Filter'
           className='m-4  sm:m-6 shadow-lg'
         >
-          <FilterComp setSearchParams={setSearchParams} />
+          <FilterComp
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+          />
         </Collapse>
       </Spin>
       <div className='m-4 p-4 sm:m-6 shadow-lg'>

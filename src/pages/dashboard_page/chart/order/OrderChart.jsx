@@ -29,7 +29,7 @@ const OrderChart = (props) => {
       setIsLoading(false)
     }
     fetch()
-  }, [date, typeData])
+  }, [date, typeData, formatter])
 
   return (
     <div className='w-5/6 md:w-5/12 flex flex-col m-4 p-2 border border-gray-100 rounded-xl shadow-xl'>

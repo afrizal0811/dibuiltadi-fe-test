@@ -1,5 +1,6 @@
 import { Form } from 'antd'
-import React, { useState } from 'react'
+import dayjs from 'dayjs'
+import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import {
   Button,
@@ -10,18 +11,24 @@ import {
 } from '../../components/antd_components'
 import { YEARMONTHDAY, formCol, ordersLink } from '../../constants/constants'
 import dateFormatter from '../../utilities/dateFormatter'
-import getCurrentDate from '../../utilities/getCurrentDate'
 import removeBlankAttributes from '../../utilities/removeBlankAttributes'
 
 const FilterComp = (props) => {
-  const { setSearchParams } = props
+  const { setSearchParams, searchParams } = props
   const { navigate } = useOutletContext()
   const [form] = Form.useForm()
-  const [date, setDate] = useState([getCurrentDate(), getCurrentDate()])
+  const [date, setDate] = useState([])
   const [isSwitchChecked, setIsSwitchChecked] = useState({
     sortBy: false,
     sortDirection: false,
   })
+
+  useEffect(() => {
+    const startDate = searchParams.get('start_date')
+    const endDate = searchParams.get('end_date')
+    setDate([dayjs(startDate, YEARMONTHDAY), dayjs(endDate, YEARMONTHDAY)])
+  }, [searchParams])
+
   const handleFinish = (values) => {
     const params = {
       sort_by: isSwitchChecked.sortBy ? 'grandtotal' : 'created_at',
@@ -107,8 +114,10 @@ const FilterComp = (props) => {
         name='dateRange'
       >
         <RangeDatePicker
+          format={YEARMONTHDAY}
           onChange={setDate}
           className='w-full'
+          values={date}
         />
       </FormItem>
       <div className='flex justify-end gap-2'>
