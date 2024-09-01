@@ -4,13 +4,14 @@ const validateForm = (value) => {
 
   if (!value.phone) {
     errors.phone = 'This field is required'
-  }  else if (!invalidPhone(value.phone)) {
+  } else if (!invalidPhone(value.phone)) {
     errors.phone = 'Input number only'
   }
-  
+
   if (!value.password) {
     errors.password = 'This field is required'
-  } 
+  }
+
   return errors
 }
 

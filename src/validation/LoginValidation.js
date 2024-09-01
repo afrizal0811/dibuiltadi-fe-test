@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { loginUrl } from '../constants/baseUrl'
 import { apiValidation, postApi } from '../utilities/handleApi'
 import isObjectEmpty from '../utilities/isObjectEmpty'
-import validateForm from '../utilities/validationForm'
+import validateForm from './error_validation/login'
 
 const LoginValidation = (navigate, phoneField, passwordField) => {
   const [errors, setErrors] = useState({})
@@ -11,6 +11,7 @@ const LoginValidation = (navigate, phoneField, passwordField) => {
   const [value, setValue] = useState({
     phone: '',
     password: '',
+    dateRange: ''
   })
 
   const isPhoneTouched = phoneField?.touched

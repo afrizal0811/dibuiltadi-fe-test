@@ -60,7 +60,8 @@ export const apiValidation = (result) => {
     else if (data) return result.data.errors
   } else {
     const { data } = result ?? {}
-    if (data) {
+    const { access_token } = data ?? {}
+    if (access_token) {
       localStorages(result.data.access_token)
       return false
     }

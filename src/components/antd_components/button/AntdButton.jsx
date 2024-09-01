@@ -1,8 +1,17 @@
 import { Button } from 'antd'
 import React from 'react'
 const AntdButton = (props) => {
-  const { text, type, disabled, htmlType, block, onClick, className, name } =
-  props
+  const {
+    text,
+    type,
+    disabled,
+    htmlType,
+    block,
+    onClick,
+    className,
+    name,
+    loading,
+  } = props
   return (
     <Button
       block={block}
@@ -12,6 +21,7 @@ const AntdButton = (props) => {
       name={name}
       onClick={onClick}
       type={type}
+      loading={loading}
     >
       {text}
     </Button>

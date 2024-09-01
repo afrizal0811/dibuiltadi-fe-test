@@ -2,23 +2,23 @@ import { Form } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  Alert,
   Button,
   FormItem,
   Input,
   InputPassword,
 } from '../../components/antd_components'
 import imagePath from '../../constants/imagePath'
+import getFormField from '../../utilities/getFormField'
 import { getToken } from '../../utilities/localStorages'
+import * as message from '../../utilities/message'
 import LoginValidation from '../../validation/LoginValidation'
-import { findField } from './help'
 
 const LoginPage = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const [fields, setFields] = useState([])
-  const phoneField = findField(fields, 'phone')
-  const passwordField = findField(fields, 'password')
+  const phoneField = getFormField(fields, 'phone')
+  const passwordField = getFormField(fields, 'password')
 
   const { errors, handleChange, handleFinish, isLoading } = LoginValidation(
     navigate,
@@ -46,13 +46,7 @@ const LoginPage = () => {
         <div className='md:w-1/2 p-6 md:p-10'>
           <div className='h-full flex flex-col justify-center items-center'>
             <div className='w-full my-10 flex flex-col'>
-              {errors.failedAlert && (
-                <Alert
-                  message={errors.failedAlert}
-                  type='error'
-                  className='mb-5'
-                />
-              )}
+              {errors.failedAlert && message.error(errors.failedAlert)}
               <Form
                 onFinish={handleFinish}
                 autoComplete='off'
