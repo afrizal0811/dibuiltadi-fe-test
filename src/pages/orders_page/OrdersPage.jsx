@@ -3,10 +3,9 @@ import { useOutletContext, useSearchParams } from 'react-router-dom'
 import { Collapse, Spin } from '../../components/antd_components'
 import { ordersUrl } from '../../constants/baseUrl'
 import { getApi } from '../../utilities/handleApi'
-import { getToken } from '../../utilities/localStorages'
+import { getToken, removeToken } from '../../utilities/localStorages'
 import FilterComp from './FilterComp'
 import OrdersTable from './table/OrdersTable'
-
 const OrdersPage = () => {
   const { navigate } = useOutletContext()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -26,6 +25,7 @@ const OrdersPage = () => {
 
   useEffect(() => {
     if (!getToken()) {
+      removeToken()
       navigate('/login')
     }
   }, [navigate])

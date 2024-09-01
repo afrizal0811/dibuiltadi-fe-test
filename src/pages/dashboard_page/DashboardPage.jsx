@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useOutletContext } from 'react-router-dom'
-import { getApi, apiValidation } from '../../utilities/handleApi'
 import { getToken, removeToken } from '../../utilities/localStorages'
 import OrderChart from './chart/order/OrderChart'
 import OrderComparison from './chart/order/order_comparison/OrderComparison'
 import TopChart from './chart/top/TopChart'
+import { YEAR, YEARMONTH } from '../../constants/constants'
 
 const DashboardPage = () => {
   const { navigate } = useOutletContext()
-  const [isAuthorized, setIsAuthorized] = useState(null)
   useEffect(() => {
-    if (!getToken() || isAuthorized) {
+    if (!getToken()) {
       removeToken()
       navigate('/login')
     }
-  }, [navigate, isAuthorized])
-
-  useEffect(() => {
-    const fetch = async () => {
-      const url = process.env.REACT_APP_BASE_URL + '/auth/profile'
-      const result = await getApi(url)
-      const isValid = apiValidation(result)
-      if (isValid) {
-        setIsAuthorized(true)
-      } else {
-        setIsAuthorized(false)
-      }
-    }
-    fetch()
-  }, [])
+  }, [navigate])
 
   return (
     <div className='text-center'>
@@ -39,16 +24,14 @@ const DashboardPage = () => {
           numberData='orders'
           titleChart='Monthly Order'
           typeData='month'
-          urlType='monthly'
-          datePickerType='month'
+          formatter={YEARMONTH}
         />
         <OrderChart
           initialDate={['2022', '2024']}
           numberData='amount'
           titleChart='Yearly Order'
           typeData='year'
-          urlType='yearly'
-          datePickerType='year'
+          formatter={YEAR}
         />
         <OrderComparison />
         <TopChart

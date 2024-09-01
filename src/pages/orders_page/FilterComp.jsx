@@ -8,10 +8,11 @@ import {
   RangeDatePicker,
   Switch,
 } from '../../components/antd_components'
-import { formCol, ordersLink } from '../../constants/constants'
+import { YEARMONTHDAY, formCol, ordersLink } from '../../constants/constants'
 import dateFormatter from '../../utilities/dateFormatter'
 import getCurrentDate from '../../utilities/getCurrentDate'
 import removeBlankAttributes from '../../utilities/removeBlankAttributes'
+
 const FilterComp = (props) => {
   const { setSearchParams } = props
   const { navigate } = useOutletContext()
@@ -28,8 +29,8 @@ const FilterComp = (props) => {
       invoice_no: values.invoiceNo,
       buyer_phone: values.buyerPhone,
       store_code: values.storeCode,
-      start_date: dateFormatter(date[0]),
-      end_date: dateFormatter(date[1]),
+      start_date: dateFormatter(date[0], YEARMONTHDAY),
+      end_date: dateFormatter(date[1], YEARMONTHDAY),
     }
     const newParams = removeBlankAttributes(params)
     setSearchParams(newParams)

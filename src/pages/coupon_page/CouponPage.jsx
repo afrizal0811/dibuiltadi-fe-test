@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom'
 import { Button, Modal } from '../../components/antd_components'
 import { couponsUrl } from '../../constants/baseUrl'
 import { getApi } from '../../utilities/handleApi'
-import { getToken } from '../../utilities/localStorages'
+import { getToken, removeToken } from '../../utilities/localStorages'
 import ModalAddForm from './modal/ModalAddForm'
 import CouponTable from './table/CouponTable'
 
@@ -19,9 +19,9 @@ const CouponPage = () => {
 
   useEffect(() => {
     if (!getToken()) {
+      removeToken()
       navigate('/login')
     }
-    return
   }, [navigate])
 
   useEffect(() => {

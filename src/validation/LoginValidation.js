@@ -28,13 +28,13 @@ const LoginValidation = (navigate, phoneField, passwordField) => {
     const url = process.env.REACT_APP_BASE_URL + loginUrl
     if (isObjectEmpty(errors) && isFieldsTouched && isSubmitted) {
       const result = await postApi(url, value)
-      const error = apiValidation(result)
-      if (!error) {
-        navigate('/')
+      const isError = await apiValidation(result)
+      if (!isError) {
+        await navigate('/')
       } else {
         setErrors((prev) => ({
           ...prev,
-          failedAlert: error !== 'Validation error' ? error : '',
+          failedAlert: isError,
         }))
       }
     }

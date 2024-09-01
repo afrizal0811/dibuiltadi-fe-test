@@ -7,9 +7,10 @@ import {
   RangeDatePicker,
 } from '../../../components/antd_components'
 import { couponsUrl } from '../../../constants/baseUrl'
-import getCurrentDate from '../../../utilities/getCurrentDate'
-import { postApi, apiValidation } from '../../../utilities/handleApi'
+import { YEARMONTHDAY } from '../../../constants/constants'
 import dateFormatter from '../../../utilities/dateFormatter'
+import getCurrentDate from '../../../utilities/getCurrentDate'
+import { apiValidation, postApi } from '../../../utilities/handleApi'
 
 const ModalAddForm = (props) => {
   const { handleCloseModal } = props
@@ -21,8 +22,8 @@ const ModalAddForm = (props) => {
     const params = {
       code: values.couponCode,
       name: values.couponName,
-      start_date: dateFormatter(date[0]),
-      end_date: dateFormatter(date[1]),
+      start_date: dateFormatter(date[0], YEARMONTHDAY),
+      end_date: dateFormatter(date[1], YEARMONTHDAY),
     }
     const result = await postApi(url, params)
     const isValid = apiValidation(result)

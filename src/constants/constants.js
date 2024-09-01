@@ -13,4 +13,6 @@ export const paginationPosition = {
 
 export const ordersLink = `/orders?sort_by=created_at&sort_direction=asc&start_date=${getCurrentDate()}&end_date=${getCurrentDate()}`
 
-export const dateFormat = 'YYYY-MM-DD'
+export const YEAR = 'YYYY'
+export const YEARMONTH = 'YYYY-MM'
+export const YEARMONTHDAY = 'YYYY-MM-DD'

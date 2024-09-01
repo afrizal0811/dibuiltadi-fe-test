@@ -1,8 +1,7 @@
 import dayjs from 'dayjs'
-import { dateFormat } from '../constants/constants'
 
-const dateFormatter = (date) => {
-  return dayjs(date, dateFormat).format(dateFormat)
+const dateFormatter = (date, formatter) => {
+  return dayjs(date, formatter).format(formatter)
 }
 
 export default dateFormatter

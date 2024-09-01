@@ -9,9 +9,10 @@ import {
   Spin,
 } from '../../../components/antd_components'
 import { couponsUrl } from '../../../constants/baseUrl'
-import { dateFormat } from '../../../constants/constants'
-import { getApi, putApi, apiValidation } from '../../../utilities/handleApi'
+import { YEARMONTHDAY } from '../../../constants/constants'
 import dateFormatter from '../../../utilities/dateFormatter'
+import { apiValidation, getApi, putApi } from '../../../utilities/handleApi'
+
 const ModalViewEditForm = (props) => {
   const { handleCloseModal, searchParams, modalType } = props
   const [form] = Form.useForm()
@@ -33,14 +34,14 @@ const ModalViewEditForm = (props) => {
       setLoading(false)
     }
     fetch()
-    setDate([dayjs(startDate, dateFormat), dayjs(endDate, dateFormat)])
+    setDate([dayjs(startDate, YEARMONTHDAY), dayjs(endDate, YEARMONTHDAY)])
   }, [couponCode, startDate, endDate])
 
-  const handleFinish = async (values) => {
+  const handleFinish = async () => {
     const url = process.env.REACT_APP_BASE_URL + couponsUrl + `/${couponCode}`
     const params = {
-      start_date: dateFormatter(date[0]),
-      end_date: dateFormatter(date[1]),
+      start_date: dateFormatter(date[0], YEARMONTHDAY),
+      end_date: dateFormatter(date[1], YEARMONTHDAY),
     }
     const result = await putApi(url, params)
     const isValid = apiValidation(result)
@@ -107,7 +108,7 @@ const ModalViewEditForm = (props) => {
         >
           <RangeDatePicker
             values={date}
-            format={dateFormat}
+            format={YEARMONTHDAY}
             onChange={setDate}
             className='w-full'
             disabled={!isModalEdit}

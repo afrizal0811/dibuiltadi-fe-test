@@ -1,13 +1,12 @@
 import axios from 'axios'
 import { getToken, localStorages } from './localStorages'
 
-const headers = {
-  'Content-Type': 'application/json',
-  Accept: 'application/json',
-  Authorization: getToken() ? `Bearer ${getToken()}` : '',
-}
-
 export const getApi = async (URL) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: getToken() ? `Bearer ${getToken()}` : '',
+  }
   const url = await axios
     .get(URL, { headers })
     .then((response) => {
@@ -20,6 +19,11 @@ export const getApi = async (URL) => {
 }
 
 export const postApi = async (URL, params) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: getToken() ? `Bearer ${getToken()}` : '',
+  }
   const url = await axios
     .post(URL, params, { headers })
     .then((response) => {
@@ -32,6 +36,11 @@ export const postApi = async (URL, params) => {
 }
 
 export const putApi = async (URL, params) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    Authorization: getToken() ? `Bearer ${getToken()}` : '',
+  }
   const url = await axios
     .put(URL, params, { headers })
     .then((response) => {
@@ -53,8 +62,7 @@ export const apiValidation = (result) => {
     const { data } = result ?? {}
     if (data) {
       localStorages(result.data.access_token)
-      return
+      return false
     }
-    return
   }
 }
