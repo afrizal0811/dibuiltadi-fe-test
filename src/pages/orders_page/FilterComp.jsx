@@ -6,21 +6,22 @@ import {
   Button,
   FormItem,
   Input,
+  Radio,
   RangeDatePicker,
-  Switch,
 } from '../../components/antd_components'
 import { YEARMONTHDAY, formCol, ordersLink } from '../../constants/constants'
 import dateFormatter from '../../utilities/dateFormatter'
 import removeBlankAttributes from '../../utilities/removeBlankAttributes'
+import { sortByOptions, sortDirectionOptions } from './help'
 
 const FilterComp = (props) => {
   const { setSearchParams, searchParams } = props
   const { navigate } = useOutletContext()
   const [form] = Form.useForm()
   const [date, setDate] = useState([])
-  const [isSwitchChecked, setIsSwitchChecked] = useState({
-    sortBy: false,
-    sortDirection: false,
+  const [radio, setRadio] = useState({
+    sortBy: 'created_at',
+    sortDirection: 'desc',
   })
 
   useEffect(() => {
@@ -31,8 +32,8 @@ const FilterComp = (props) => {
 
   const handleFinish = (values) => {
     const params = {
-      sort_by: isSwitchChecked.sortBy ? 'grandtotal' : 'created_at',
-      sort_direction: isSwitchChecked.sortDirection ? 'desc' : 'asc',
+      sort_by: radio.sortBy,
+      sort_direction: radio.sortDirection,
       invoice_no: values.invoiceNo,
       buyer_phone: values.buyerPhone,
       store_code: values.storeCode,
@@ -61,22 +62,26 @@ const FilterComp = (props) => {
         label='Sort By'
         name='sortBy'
       >
-        <Switch
-          checkedChildren='Grand Total'
+        <Radio
           name='sortBy'
-          setIsSwitchChecked={setIsSwitchChecked}
-          unCheckedChildren='Created At'
+          options={sortByOptions}
+          setRadio={setRadio}
+          values={radio.sortBy}
+          optionType='button'
+          buttonStyle='solid'
         />
       </FormItem>
       <FormItem
         label='Sort Direction'
         name='sortDirection'
       >
-        <Switch
-          checkedChildren='Desc'
+        <Radio
           name='sortDirection'
-          setIsSwitchChecked={setIsSwitchChecked}
-          unCheckedChildren='Asc'
+          options={sortDirectionOptions}
+          setRadio={setRadio}
+          values={radio.sortDirection}
+          optionType='button'
+          buttonStyle='solid'
         />
       </FormItem>
       <FormItem

@@ -26,3 +26,25 @@ export const details = (data) => {
     },
   ]
 }
+
+export const sortByOptions = [
+  {
+    label: 'Created Date',
+    value: 'created_at',
+  },
+  {
+    label: 'Grand Total',
+    value: 'grandtotal',
+  },
+]
+
+export const sortDirectionOptions = [
+  {
+    label: 'Desc',
+    value: 'desc',
+  },
+  {
+    label: 'Asc',
+    value: 'asc',
+  },
+]
