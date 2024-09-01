@@ -32,8 +32,8 @@ const OrderChart = (props) => {
   }, [date, typeData, formatter])
 
   return (
-    <div className='w-5/6 md:w-5/12 flex flex-col m-4 p-2 border border-gray-100 rounded-xl shadow-xl'>
-      <div className='w-full  pt-2 z-10 flex flex-col gap-1 justify-center items-center'>
+    <div className='w-5/6 md:w-5/12 flex flex-col m-4 p-2 border border-gray-100 rounded-xl shadow-xl bg-white'>
+      <div className='w-full pt-2 z-10 flex flex-col gap-1 justify-center items-center'>
         <p className='text-sm font-semibold'>Date Range</p>
         <RangeDatePicker
           onChange={setDate}
@@ -41,7 +41,7 @@ const OrderChart = (props) => {
         />
       </div>
       <Spin loading={isLoading}>
-        <div className='w-full'>
+        <div className='w-full -mt-6 '>
           <Chart
             chartType='BarChart'
             height='600px'

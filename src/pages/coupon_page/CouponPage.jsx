@@ -57,7 +57,7 @@ const CouponPage = () => {
       <Button
         text='Tambah Coupon'
         onClick={() => handleOpenModal(true)}
-        className='mt-4 mx-4 sm:mx-6'
+        className='mt-6 mx-4 sm:mx-6'
         type='text'
       />
       <Modal
@@ -67,7 +67,7 @@ const CouponPage = () => {
         isModalOpen={isModalOpen}
         title='Input Data Coupon'
       />
-      <div className='m-4 p-4 sm:m-6 shadow-lg'>
+      <div className='m-4 p-4 sm:m-6 shadow-lg bg-white rounded-xl'>
         <CouponTable
           data={values.items}
           handlePageChange={handlePageChange}

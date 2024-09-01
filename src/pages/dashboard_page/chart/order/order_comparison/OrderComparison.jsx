@@ -21,7 +21,7 @@ const OrderComparison = () => {
   }, [])
 
   return (
-    <div className='w-5/6 md:w-5/12 flex flex-col m-4 p-2 border border-gray-100 rounded-xl shadow-xl'>
+    <div className='w-5/6 md:w-5/12 flex flex-col m-4 p-2 border border-gray-100 rounded-xl shadow-xl bg-white'>
       <Spin loading={isLoading}>
         <div className='w-full'>
           <Chart

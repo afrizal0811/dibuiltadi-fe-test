@@ -16,9 +16,8 @@ const DashboardPage = () => {
   }, [navigate])
 
   return (
-    <div className='text-center'>
-      <h1 className='text-red-500'>DashboardPage</h1>
-      <div className='flex flex-wrap gap-4 justify-center items-center'>
+    <div className='text-center mt-4 sm:mt-6'>
+      <div className='flex flex-wrap gap-2 justify-center items-stretch'>
         <OrderChart
           initialDate={['2022-01', '2024-08']}
           numberData='orders'

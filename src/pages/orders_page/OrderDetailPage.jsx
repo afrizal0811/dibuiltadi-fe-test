@@ -55,7 +55,7 @@ const OrderDetailPage = () => {
         className='mt-4 mx-4 sm:mx-6'
         type='text'
       />
-      <div className='flex flex-col gap-6 m-4 p-4 sm:m-6 shadow-lg'>
+      <div className='flex flex-col gap-6 m-4 p-6 sm:m-6 rounded-xl shadow-lg bg-white'>
         {renderDetails}
         <OrderDetailTable
           data={values.items}

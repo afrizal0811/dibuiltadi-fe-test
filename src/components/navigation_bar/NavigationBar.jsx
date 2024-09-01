@@ -47,7 +47,7 @@ const NavigationBar = (props) => {
               <li>
                 <Link
                   to={item.link}
-                  className={`text-sm text-eerie-black ${
+                  className={`text-md text-eerie-black ${
                     item === pathname.substring(1)
                       ? 'font-bold'
                       : 'font-semibold'
@@ -114,7 +114,7 @@ const NavigationBar = (props) => {
                   <Link
                     to={item.link}
                     onClick={() => setIsBurgerOpen(false)}
-                    className='block p-4 text-sm font-semibold text-eerie-black hover:bg-jet-stream-light hover:font-bold rounded'
+                    className='block p-4 text-md font-semibold text-eerie-black hover:bg-jet-stream-light hover:font-bold rounded'
                   >
                     {titleCase(item.name)}
                   </Link>

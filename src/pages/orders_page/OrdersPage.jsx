@@ -67,7 +67,7 @@ const OrdersPage = () => {
       <Spin loading={loading}>
         <Collapse
           header='Filter'
-          className='m-4  sm:m-6 shadow-lg'
+          className='m-4 sm:m-6 shadow-lg bg-white rounded-xl'
         >
           <FilterComp
             searchParams={searchParams}
@@ -75,7 +75,7 @@ const OrdersPage = () => {
           />
         </Collapse>
       </Spin>
-      <div className='m-4 p-4 sm:m-6 shadow-lg'>
+      <div className='m-4 p-4 sm:m-6 shadow-lg bg-white rounded-xl'>
         <OrdersTable
           data={values.items}
           loading={loading}
