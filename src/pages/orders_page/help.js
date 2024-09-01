@@ -1,3 +1,5 @@
+import numberFormatter from '../../utilities/numberFormatter'
+
 export const details = (data) => {
   const coupon = data.coupon?.name
     ? `${data.coupon?.name} (${data.coupon?.code})`
@@ -22,7 +24,7 @@ export const details = (data) => {
     },
     {
       title: 'Grand Total',
-      value: Number(data.grandtotal),
+      value: numberFormatter(Number(data.grandtotal)),
     },
   ]
 }

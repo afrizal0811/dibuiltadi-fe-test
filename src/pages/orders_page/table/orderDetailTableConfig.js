@@ -1,3 +1,5 @@
+import numberFormatter from "../../../utilities/numberFormatter"
+
 export const columns = [
   {
     dataIndex: ['product', 'code'],
@@ -22,7 +24,7 @@ export const columns = [
     dataIndex: ['product', 'price'],
     key: 'productPrice',
     title: 'Product Price',
-    render: (text) => Number(text),
+    render: (text) => numberFormatter(Number(text)),
     width: 25,
   },
   {
@@ -36,6 +38,6 @@ export const columns = [
     key: 'totalPrice',
     title: 'Total Price',
     width: 25,
-    render: (text) => Number(text),
+    render: (text) => numberFormatter(Number(text)),
   },
 ]

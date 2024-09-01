@@ -1,5 +1,5 @@
 import { Button } from '../../../components/antd_components'
-
+import numberFormatter from '../../../utilities/numberFormatter'
 export const columns = (handleDetail) => [
   {
     dataIndex: 'invoice_no',
@@ -36,7 +36,7 @@ export const columns = (handleDetail) => [
     key: 'grandTotal',
     title: 'Grand Total',
     width: 25,
-    render: (text) => Number(text),
+    render: (text) => numberFormatter(Number(text)),
   },
   {
     key: 'action',

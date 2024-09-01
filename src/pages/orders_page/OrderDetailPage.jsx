@@ -1,3 +1,4 @@
+import { LeftOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import { Button, Spin } from '../../components/antd_components'
@@ -50,9 +51,10 @@ const OrderDetailPage = () => {
   return (
     <div>
       <Button
-        text='Kembali'
-        onClick={() => navigate(-1)}
         className='mt-4 mx-4 sm:mx-6'
+        icon={<LeftOutlined />}
+        onClick={() => navigate(-1)}
+        text='Kembali'
         type='text'
       />
       <div className='flex flex-col gap-6 m-4 p-6 sm:m-6 rounded-xl shadow-lg bg-white'>
