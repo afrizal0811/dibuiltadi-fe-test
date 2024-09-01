@@ -15,6 +15,19 @@ const RouteHandler = () => {
         element={<LoginPage />}
         path='/login'
       />
+      <Route
+        element={<NotFoundPage />}
+        path='404'
+      />
+      <Route
+        element={
+          <Navigate
+            replace
+            to='404'
+          />
+        }
+        path='*'
+      />
       <Route element={<Layout />}>
         <Route
           element={<DashboardPage />}
@@ -31,19 +44,6 @@ const RouteHandler = () => {
         <Route
           element={<OrderDetailPage />}
           path='/orders/:invoice'
-        />
-        <Route
-          element={<NotFoundPage />}
-          path='404'
-        />
-        <Route
-          element={
-            <Navigate
-              replace
-              to='404'
-            />
-          }
-          path='*'
         />
       </Route>
     </Routes>
