@@ -34,68 +34,68 @@ const ModalAddForm = (props) => {
   return (
     <Form
       autoComplete='off'
+      className='m-4'
+      fields={fields}
       form={form}
-      layout='vertical'
       labelAlign='left'
+      layout='vertical'
       noValidate
       onFinish={handleFinish}
       onReset={handleCancel}
-      className='m-4'
-      fields={fields}
       onFieldsChange={(_, allFields) => {
         setFields(allFields)
       }}
     >
       <FormItem
-        label='Coupon Code'
-        name='couponCode'
         errors={errors.couponCode}
         fields={couponCodeField}
+        label='Coupon Code'
+        name='couponCode'
       >
         <Input
-          placeholder='Input Coupon Code'
           name='couponCode'
-          type='text'
           onChange={handleChange}
+          placeholder='Input Coupon Code'
+          type='text'
         />
       </FormItem>
       <FormItem
-        label='Coupon Name'
-        name='couponName'
         errors={errors.couponName}
         fields={couponNameField}
+        label='Coupon Name'
+        name='couponName'
       >
         <Input
-          placeholder='Input Coupon Name'
           name='couponName'
-          type='text'
           onChange={handleChange}
+          placeholder='Input Coupon Name'
+          type='text'
         />
       </FormItem>
       <FormItem
-        label='Availablity Date'
-        name='dateRange'
         errors={errors.dateRange}
         fields={dateRangeField}
+        label='Availablity Date'
+        name='dateRange'
       >
         <RangeDatePicker
-          onChange={setDate}
           className='w-full'
           name='dateRange'
+          onChange={setDate}
         />
       </FormItem>
       <div className='flex justify-end gap-2'>
         <Button
-          text='Batal'
           className='bg-white hover:!bg-white border hover:!border-jet-stream-dark'
-          onClick={handleCancel}
           loading={isLoading}
+          onClick={handleCancel}
+          text='Batal'
         />
         <Button
-          text='Simpan'
+          disabled={!isObjectEmpty(errors)}
           htmlType='submit'
           loading={isLoading}
-          disabled={!isObjectEmpty(errors)}
+          text='Simpan'
         />
       </div>
     </Form>

@@ -4,15 +4,15 @@ import { YEARMONTHDAY } from '../constants/constants'
 import dateFormatter from '../utilities/dateFormatter'
 import { apiValidation, postApi } from '../utilities/handleApi'
 import isObjectEmpty from '../utilities/isObjectEmpty'
-import validateForm from './error_validation/coupon'
 import * as message from '../utilities/message'
+import validateForm from './error_validation/coupon'
 
 const CouponValidation = (
   couponCodeField,
   couponNameField,
   dateRangeField,
   date,
-  handleCancel,
+  handleCancel
 ) => {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
@@ -52,7 +52,6 @@ const CouponValidation = (
         message.error(isError.code)
       }
     }
-    
     setIsLoading(false)
   }
 

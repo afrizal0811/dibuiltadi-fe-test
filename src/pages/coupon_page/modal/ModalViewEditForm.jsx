@@ -12,6 +12,7 @@ import { couponsUrl } from '../../../constants/baseUrl'
 import { YEARMONTHDAY } from '../../../constants/constants'
 import dateFormatter from '../../../utilities/dateFormatter'
 import { apiValidation, getApi, putApi } from '../../../utilities/handleApi'
+import * as message from '../../../utilities/message'
 
 const ModalViewEditForm = (props) => {
   const { handleCloseModal, searchParams, modalType } = props
@@ -24,6 +25,7 @@ const ModalViewEditForm = (props) => {
   const couponCode = searchParams.get('coupon_code')
   const startDate = searchParams.get('start_date')
   const endDate = searchParams.get('end_date')
+  const isDateNull = date === null
 
   useEffect(() => {
     const fetch = async () => {
@@ -44,8 +46,13 @@ const ModalViewEditForm = (props) => {
       end_date: dateFormatter(date[1], YEARMONTHDAY),
     }
     const result = await putApi(url, params)
-    const isValid = apiValidation(result)
-    if (!isValid) handleCancel()
+    const isError = apiValidation(result)
+    if (!isError) {
+      message.success('Success')
+      handleCancel()
+    } else {
+      message.error(isError.code)
+    }
   }
 
   const handleCancel = () => {
@@ -56,13 +63,16 @@ const ModalViewEditForm = (props) => {
   const renderButton = (
     <div className='flex justify-end gap-2'>
       <Button
-        text='Batal'
         className='bg-white hover:!bg-white border hover:!border-jet-stream-dark'
+        loading={isLoading}
         onClick={handleCancel}
+        text='Batal'
       />
       <Button
-        text='Simpan'
+        disabled={isDateNull}
         htmlType='submit'
+        loading={isLoading}
+        text='Simpan'
       />
     </div>
   )
@@ -70,23 +80,23 @@ const ModalViewEditForm = (props) => {
   return (
     <Spin loading={isLoading}>
       <Form
+        className='m-4'
         form={form}
-        layout='vertical'
         labelAlign='left'
+        layout='vertical'
         noValidate
         onFinish={handleFinish}
         onReset={handleCancel}
-        className='m-4'
       >
         <FormItem
           label='Coupon Code'
           name='couponCode'
         >
           <Input
-            placeholder='Input Coupon Code'
-            name='couponCode'
-            type='text'
             disabled
+            name='couponCode'
+            placeholder='Input Coupon Code'
+            type='text'
             values={values.code}
           />
         </FormItem>
@@ -95,10 +105,10 @@ const ModalViewEditForm = (props) => {
           name='couponName'
         >
           <Input
-            placeholder='Input Coupon Name'
-            name='couponName'
-            type='text'
             disabled
+            name='couponName'
+            placeholder='Input Coupon Name'
+            type='text'
             values={values.name}
           />
         </FormItem>
@@ -107,11 +117,11 @@ const ModalViewEditForm = (props) => {
           name='dateRange'
         >
           <RangeDatePicker
-            values={date}
-            format={YEARMONTHDAY}
-            onChange={setDate}
             className='w-full'
             disabled={!isModalEdit}
+            format={YEARMONTHDAY}
+            onChange={setDate}
+            values={date}
           />
         </FormItem>
         {isModalEdit && renderButton}
