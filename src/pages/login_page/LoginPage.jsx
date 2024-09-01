@@ -16,9 +16,15 @@ import { findField } from './help'
 const LoginPage = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
-  const { errors, handleChange, handleFinish, isLoading, isSubmitted } =
-    LoginValidation(navigate)
   const [fields, setFields] = useState([])
+  const phoneField = findField(fields, 'phone')
+  const passwordField = findField(fields, 'password')
+
+  const { errors, handleChange, handleFinish, isLoading } = LoginValidation(
+    navigate,
+    phoneField,
+    passwordField
+  )
 
   useEffect(() => {
     if (getToken()) {
@@ -70,8 +76,7 @@ const LoginPage = () => {
                   errors={errors.phone}
                   label='Phone Number'
                   name='phone'
-                  fields={findField(fields, 'phone')}
-                  isSubmitted={isSubmitted}
+                  fields={phoneField}
                 >
                   <Input
                     placeholder='Input your phone number'
@@ -84,8 +89,7 @@ const LoginPage = () => {
                   errors={errors.password}
                   label='Password'
                   name='password'
-                  fields={findField(fields, 'password')}
-                  isSubmitted={isSubmitted}
+                  fields={passwordField}
                 >
                   <InputPassword
                     placeholder='Input your password'

@@ -4,7 +4,7 @@ import { apiValidation, postApi } from '../utilities/handleApi'
 import isObjectEmpty from '../utilities/isObjectEmpty'
 import validateForm from '../utilities/validationForm'
 
-const LoginValidation = (navigate) => {
+const LoginValidation = (navigate, phoneField, passwordField) => {
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -13,10 +13,12 @@ const LoginValidation = (navigate) => {
     password: '',
   })
 
+  const isPhoneTouched = phoneField?.touched
+  const isPasswordTouched = passwordField?.touched
+  const isFieldsTouched = isPhoneTouched || isPasswordTouched
+
   useEffect(() => {
-    if (isSubmitted) {
-      setErrors(validateForm(value))
-    }
+    if (isSubmitted) setErrors(validateForm(value))
   }, [value, isSubmitted])
 
   const handleFinish = async () => {
@@ -24,7 +26,7 @@ const LoginValidation = (navigate) => {
     setIsSubmitted(true)
     setErrors(validateForm(value))
     const url = process.env.REACT_APP_BASE_URL + loginUrl
-    if (isObjectEmpty(errors)) {
+    if (isObjectEmpty(errors) && isFieldsTouched && isSubmitted) {
       const result = await postApi(url, value)
       const error = apiValidation(result)
       if (!error) {
