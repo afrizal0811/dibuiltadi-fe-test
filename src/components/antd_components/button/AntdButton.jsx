@@ -15,7 +15,7 @@ const AntdButton = (props) => {
   return (
     <Button
       block={block}
-      className={`font-bold bg-jet-stream rounded-lg border !border-jet-stream hover:!bg-jet-stream-dark hover:!text-eerie-black disabled:!bg-gray-200 disabled:!text-gray-500 ${className}`}
+      className={`font-bold bg-jet-stream rounded-lg border py-4 !border-jet-stream hover:!bg-jet-stream-dark hover:!text-eerie-black disabled:!bg-gray-200 disabled:!text-gray-500 ${className}`}
       disabled={disabled}
       htmlType={htmlType}
       name={name}
@@ -23,7 +23,7 @@ const AntdButton = (props) => {
       type={type}
       loading={loading}
     >
-      {text}
+      <div className='mt-1'>{text}</div>
     </Button>
   )
 }

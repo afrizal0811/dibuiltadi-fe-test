@@ -95,7 +95,7 @@ const LoginPage = () => {
                 <Button
                   text='Sign In'
                   htmlType='submit'
-                  disabled={isLoading}
+                  loading={isLoading}
                   block
                 />
               </Form>
