@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { getToken, localStorages } from './localStorages'
 
+const headers = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
+  Authorization: getToken() ? `Bearer ${getToken()}` : '',
+}
+
 export const getApi = async (URL) => {
-  const headers = {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-    Authorization: getToken() ? `Bearer ${getToken()}` : '',
-  }
   const url = await axios
     .get(URL, { headers })
     .then((response) => {
@@ -20,7 +21,19 @@ export const getApi = async (URL) => {
 
 export const postApi = async (URL, params) => {
   const url = await axios
-    .post(URL, params)
+    .post(URL, params, { headers })
+    .then((response) => {
+      return response
+    })
+    .catch((error) => {
+      return error.response
+    })
+  return url
+}
+
+export const putApi = async (URL, params) => {
+  const url = await axios
+    .put(URL, params, { headers })
     .then((response) => {
       return response
     })
@@ -35,12 +48,13 @@ export const apiValidation = (result) => {
     const { response } = result ?? {}
     const { data } = result ?? {}
     if (response) return result.response.data.response_message
-    else if (data) return result.data.response_message
+    else if (data) return result.data.errors
   } else {
     const { data } = result ?? {}
     if (data) {
       localStorages(result.data.access_token)
+      return
     }
-    return null
+    return
   }
 }

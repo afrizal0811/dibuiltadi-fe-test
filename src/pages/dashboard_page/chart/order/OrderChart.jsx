@@ -38,7 +38,7 @@ const OrderChart = (props) => {
       <div className='w-full -mb-8 pt-2 z-10 flex flex-col gap-1 justify-center items-center'>
         <p className='text-sm font-semibold'>Date Range</p>
         <RangeDatePicker
-          setDate={setDate}
+          onChange={setDate}
           picker={datePickerType}
         />
       </div>

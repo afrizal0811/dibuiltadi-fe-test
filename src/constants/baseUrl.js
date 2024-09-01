@@ -1,4 +1,8 @@
-export const loginUrl = '/common/v1/auth/login'
-export const orderSummaryUrl = '/common/v1/summaries/orders'
-export const topSummaryUrl = '/common/v1/summaries/top'
-export const ordersUrl = '/customer-service/v1/orders'
+const commonUrl = '/common/v1'
+const customerServiceUrl = '/customer-service/v1'
+
+export const loginUrl = commonUrl + '/auth/login'
+export const orderSummaryUrl = commonUrl + '/summaries/orders'
+export const topSummaryUrl = commonUrl + '/summaries/top'
+export const ordersUrl = customerServiceUrl + '/orders'
+export const couponsUrl = customerServiceUrl + '/coupons'

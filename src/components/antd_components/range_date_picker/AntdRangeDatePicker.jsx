@@ -2,15 +2,16 @@ import { DatePicker } from 'antd'
 import React from 'react'
 
 const AntdRangeDatePicker = (props) => {
-  const { picker, setDate, className } = props
-  const handleChange = (date, dateString) => {
-    setDate(dateString)
-  }
+  const { picker, onChange, className, disabled, values, format } = props
+
   return (
     <DatePicker.RangePicker
       className={className}
-      onChange={handleChange}
+      disabled={disabled}
+      format={format}
+      onChange={onChange}
       picker={picker}
+      value={values}
     />
   )
 }

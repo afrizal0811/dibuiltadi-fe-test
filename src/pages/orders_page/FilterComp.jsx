@@ -9,6 +9,7 @@ import {
   Switch,
 } from '../../components/antd_components'
 import { formCol, ordersLink } from '../../constants/constants'
+import dateFormatter from '../../utilities/dateFormatter'
 import getCurrentDate from '../../utilities/getCurrentDate'
 import removeBlankAttributes from '../../utilities/removeBlankAttributes'
 const FilterComp = (props) => {
@@ -27,8 +28,8 @@ const FilterComp = (props) => {
       invoice_no: values.invoiceNo,
       buyer_phone: values.buyerPhone,
       store_code: values.storeCode,
-      start_date: date[0],
-      end_date: date[1],
+      start_date: dateFormatter(date[0]),
+      end_date: dateFormatter(date[1]),
     }
     const newParams = removeBlankAttributes(params)
     setSearchParams(newParams)
@@ -105,7 +106,7 @@ const FilterComp = (props) => {
         name='dateRange'
       >
         <RangeDatePicker
-          setDate={setDate}
+          onChange={setDate}
           className='w-full'
         />
       </FormItem>
