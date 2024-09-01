@@ -32,42 +32,48 @@ const NavigationBar = (props) => {
         </Link>
         <div className='sm:hidden'>
           <div
-            className=' flex items-center text-eerie-black p-4 border bg-jet-stream rounded-lg cursor-pointer hover:bg-pewter-blue'
+            className='flex items-center text-eerie-black p-4 border bg-jet-stream rounded-lg cursor-pointer hover:bg-jet-stream-dark'
             onClick={() => setIsBurgerOpen(true)}
           >
             <MenuOutlined />
           </div>
         </div>
         <ul className='hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 sm:flex sm:mx-auto sm:items-center sm:w-auto sm:gap-4'>
-          {menuList.map((item, index) => (
-            <span
-              key={index}
-              className='flex gap-4'
-            >
-              <li>
-                <Link
-                  to={item.link}
-                  className={`text-md text-eerie-black ${
-                    item === pathname.substring(1)
-                      ? 'font-bold'
-                      : 'font-semibold'
-                  }`}
-                >
-                  {titleCase(item.name)}
-                </Link>
-              </li>
-              {index !== menuList.length - 1 && (
-                <li className='text-gray-500'>
-                  <MoreOutlined />
+          {menuList.map((item, index) => {
+            const isOrderPage =
+              item.link.substring(0, item.link.indexOf('?')) === pathname
+            const isCouponPage = item.link === pathname
+
+            return (
+              <span
+                key={index}
+                className='flex gap-4'
+              >
+                <li>
+                  <Link
+                    to={item.link}
+                    className={`text-md text-eerie-black hover:bg-gray-50 p-2 ${
+                      isCouponPage || isOrderPage
+                        ? 'font-bold border-b-2 border-jet-stream-dark pb-2'
+                        : 'font-normal'
+                    }`}
+                  >
+                    {titleCase(item.name)}
+                  </Link>
                 </li>
-              )}
-            </span>
-          ))}
+                {index !== menuList.length - 1 && (
+                  <li className='text-gray-500'>
+                    <MoreOutlined />
+                  </li>
+                )}
+              </span>
+            )
+          })}
         </ul>
         <Button
           className='hidden sm:flex'
-          text='Log Out'
           onClick={handleLogout}
+          text='Log Out'
         />
       </nav>
       <div
@@ -98,7 +104,7 @@ const NavigationBar = (props) => {
               />
             </Link>
             <div
-              className='flex items-center text-eerie-black p-4 border bg-jet-stream rounded-lg cursor-pointer hover:bg-pewter-blue'
+              className='flex items-center text-eerie-black p-4 border bg-jet-stream rounded-lg cursor-pointer hover:bg-jet-stream-dark'
               onClick={() => setIsBurgerOpen(false)}
             >
               <CloseOutlined />
@@ -124,9 +130,9 @@ const NavigationBar = (props) => {
           </div>
           <div className='mt-auto'>
             <Button
-              text='Log Out'
-              onClick={handleLogout}
               block
+              onClick={handleLogout}
+              text='Log Out'
             />
           </div>
         </nav>

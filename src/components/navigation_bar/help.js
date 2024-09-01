@@ -1,9 +1,9 @@
-import { ordersLink } from '../../constants/constants'
+import { ordersLink, couponLink } from '../../constants/constants'
 
 export const menuList = [
   {
     name: 'coupon',
-    link: '/coupon',
+    link: couponLink,
   },
   {
     name: 'orders',

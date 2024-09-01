@@ -64,7 +64,7 @@ const LoginPage = () => {
                   className='w-20 h-20 object-contain mx-auto mb-1'
                 />
                 <h1 className='mb-6 text-xl sm:text-2xl font-bold text-center'>
-                  Sign in to your account
+                  Log in to your account
                 </h1>
                 <FormItem
                   errors={errors.phone}
@@ -93,10 +93,10 @@ const LoginPage = () => {
                   />
                 </FormItem>
                 <Button
-                  text='Sign In'
+                  block
                   htmlType='submit'
                   loading={isLoading}
-                  block
+                  text='Log In'
                 />
               </Form>
             </div>

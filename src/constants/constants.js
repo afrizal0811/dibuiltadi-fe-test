@@ -10,7 +10,7 @@ export const formCol = {
 export const paginationPosition = {
   position: ['topRight', 'bottomRight'],
 }
-
+export const couponLink = '/coupon'
 export const ordersLink = `/orders?sort_by=created_at&sort_direction=asc&start_date=${getCurrentDate()}&end_date=${getCurrentDate()}`
 
 export const YEAR = 'YYYY'

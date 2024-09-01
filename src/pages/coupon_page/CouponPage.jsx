@@ -1,3 +1,4 @@
+import { PlusOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { Button, Modal } from '../../components/antd_components'
@@ -59,6 +60,7 @@ const CouponPage = () => {
         onClick={() => handleOpenModal(true)}
         className='mt-6 mx-4 sm:mx-6'
         type='text'
+        icon={<PlusOutlined />}
       />
       <Modal
         content={<ModalAddForm handleCloseModal={handleCloseModal} />}
